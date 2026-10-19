@@ -29,3 +29,6 @@ env/
 
 **/node_modules/
 **/.next/
+*.tsbuildinfo
+
+!.env.example
