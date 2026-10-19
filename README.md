@@ -30,11 +30,11 @@ flowchart LR
 6. **Run the pipeline.** `run_bot()` in `bot.py` builds the starting LLM context (a system prompt for the tutor role, a scenario briefing, and the stimulus text) and wires up a Pipecat pipeline. Each piece passes frames (chunks of audio, text or video) to the next:
    - `SmallWebRTCTransport.input()` receives the learner's audio and video. Silero VAD detects speech and the local Smart Turn v3 model decides when the learner has finished their turn, so the bot does not cut in mid-sentence.
    - `DeepgramFluxSTTService` turns speech into text.
-   - `TranscriptProcessor.user()` logs the learner's words as transcript entries, and the user side of `LLMContextAggregatorPair` adds them to the LLM context.
+   - The user side of `LLMContextAggregatorPair` adds the learner's words to the LLM context. A `TranscriptProcessor.user()` step also sits here and emits transcript events, but nothing in this repo listens to them yet.
    - `OpenAILLMService`, pointed at OpenRouter's OpenAI-compatible API, writes the tutor's reply (the model is set by `OPEN_ROUTER_MODEL`, default `google/gemini-2.5-flash`).
    - `ElevenLabsTTSService` turns the reply into speech.
    - `TavusVideoService` sends that audio to Tavus, which returns a video of an avatar speaking it.
-   - `SmallWebRTCTransport.output()` streams the audio and video back to the browser. After that, `TranscriptProcessor.assistant()` and the assistant side of the aggregator record the reply, so the LLM sees it on the next turn.
+   - `SmallWebRTCTransport.output()` streams the audio and video back to the browser. After that, the assistant side of the aggregator records the reply, so the LLM sees it on the next turn.
 
    When the browser connects, the bot queues an `LLMRunFrame` so the tutor speaks first and sets the scene. When the browser disconnects, the task is cancelled.
 
