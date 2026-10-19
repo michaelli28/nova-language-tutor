@@ -7,7 +7,7 @@ name = "language-learning-agent"
 version = "0.1.0"
 description = "Pipecat-based language learning agent service"
 requires-python = ">=3.10"
-authors = [{name = "Possible", email = "dev@example.com"}]
+authors = [{name = "Michael Li"}]
 dependencies = [
     "pipecat-ai>=0.0.79",
     "python-dotenv>=1.0.1",
@@ -21,11 +21,7 @@ dev = [
 ]
 
 [tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
+py-modules = ["bot", "server"]
 
 [tool.ruff]
 line-length = 100
-src = ["src"]
