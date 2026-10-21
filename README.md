@@ -2,6 +2,8 @@
 
 Nova is a role-play language tutor you talk to over a live video call. You describe a scene (ordering at a restaurant, buying a train ticket), pick the language you speak and the one you are learning, and an AI avatar plays the other person in that scene and speaks back in the target language.
 
+Built by Matthew Li and Michael Li.
+
 Demo video: https://www.youtube.com/watch?v=kn-u5i2jlFM
 
 ## How it works
